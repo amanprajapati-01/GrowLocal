@@ -1,5 +1,5 @@
 /** Loading shimmer blocks (150–250ms ease per iteration guide). */
-export default function Skeleton({ className = "" }: { className?: string }) {
+export function Skeleton({ className = "" }: { className?: string }) {
   return (
     <div
       aria-hidden
@@ -7,6 +7,9 @@ export default function Skeleton({ className = "" }: { className?: string }) {
     />
   );
 }
+
+const SkeletonDefault = Skeleton;
+export default SkeletonDefault;
 
 export function SkeletonCard() {
   return (

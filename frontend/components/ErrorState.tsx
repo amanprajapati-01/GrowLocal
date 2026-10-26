@@ -8,7 +8,7 @@ export default function ErrorState({
   code,
   onRetry,
 }: {
-  code?: string;
+  code?: string | null;
   onRetry?: () => void;
 }) {
   const tErrors = useTranslations("errors");

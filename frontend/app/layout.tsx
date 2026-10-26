@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Noto_Sans_Devanagari } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
+import ToastProvider from "@/components/Toast";
+import BottomNav from "@/components/BottomNav";
 import "@/app/globals.css";
 
 const inter = Inter({
@@ -35,13 +37,17 @@ export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const locale = await getLocale();
-
   const messages = await getMessages();
 
   return (
     <html lang={locale} className={`${inter.variable} ${notoDev.variable}`}>
-      <body className="min-h-dvh bg-canvas text-ink antialiased">
-        <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+      <body className="pb-14 min-h-dvh bg-canvas text-ink antialiased sm:pb-0">
+        <NextIntlClientProvider messages={messages}>
+          <ToastProvider>
+            {children}
+            <BottomNav />
+          </ToastProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
