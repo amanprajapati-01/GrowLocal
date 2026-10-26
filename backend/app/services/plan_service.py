@@ -11,7 +11,7 @@ from fastapi import HTTPException
 
 from app.config import get_settings
 from app.models.plan import BudgetAllocation, BudgetItem, PlanRequest, PlanResponse
-from app.services import gemini
+from app.services import gemini, planner
 from app.services.allocator import allocate
 from app.services.scorer import audiences_as_strings, select_channels
 from app.services.store import Store, get_store
@@ -29,6 +29,7 @@ def _input_hash(req: PlanRequest) -> str:
             "monthlyBudgetInr": req.monthlyBudgetInr,
             "goal": req.goal.value,
             "targetAudience": [a.value for a in req.targetAudience],
+            "targetAudienceText": req.targetAudienceText.lower(),
             "language": req.language.value,
         },
         sort_keys=True,
@@ -113,12 +114,17 @@ async def create_plan(user_uid: str, req: PlanRequest) -> PlanResponse:
     plan = await gemini.generate_plan(
         request, selected, allocation, req.language.value, feedback_summary
     )
-    plan = _enforce_budgets(plan, selected, allocation)
+    try:
+        plan = _enforce_budgets(plan, selected, allocation)
+    except ValueError as exc:
+        logger.warning("model channel mix rejected (%s); rebuilding from rules", exc)
+        rule_plan = planner.build_plan(request, selected, allocation, req.language.value)
+        plan = _enforce_budgets(rule_plan, selected, allocation)
     total = sum(i.amountInr for i in plan.budgetAllocation.items) + plan.budgetAllocation.bufferInr
     if total > req.monthlyBudgetInr:
-        plan = await _rebuild_with_allocator(
-            request, selected, allocation, req.language.value, plan
-        )
+        logger.warning("budget overflow after enforcement; rebuilding from rules")
+        rule_plan = planner.build_plan(request, selected, allocation, req.language.value)
+        plan = _enforce_budgets(rule_plan, selected, allocation)
 
     plan.planId = f"pln_{uuid.uuid4().hex[:12]}"
     plan.createdAt = datetime.now(UTC).isoformat()
@@ -149,8 +155,7 @@ async def _rebuild_with_allocator(
     plan: PlanResponse,
 ) -> PlanResponse:
     """Safety net: if totals still exceed budget, rebuild the whole plan from rules."""
-    logger.warning("budget overflow after enforcement; rebuilding from rule engine")
-    return await gemini.generate_plan(request, selected, allocation, language, "")
+    return planner.build_plan(request, selected, allocation, language, "rule_fallback")
 
 
 def _to_doc(
