@@ -106,3 +106,12 @@
 - _2026-10-26 12:00 — Step 7: versioned prompts (plan/content), gemini.py with JSON mode + retry + fallback + `GEMINI_MOCK`, planner.py bilingual rule-based builder, content_fallback.py._
 - _2026-10-26 12:10 — Step 8: auth dependency (dev switch), MemoryStore/FirestoreStore, routers (plan/content/feedback/places + GET /api/channels), consistent error envelope, rate limit + 24h input-hash cache, full API happy-path tests._
 - _2026-10-26 12:12 — pytest: 43 passed; ruff clean; black formatted; requirements.txt frozen._
+- _2026-10-26 13:55 — Step 9 complete: frontend scaffolded (Next.js 16.4.3 + React 19.3 + Tailwind v4 + TS), extra deps installed (next-intl, firebase, lucide-react, recharts, clsx). Cookie-based i18n (en/hi, no URL routing) verified live: `locale=hi` cookie → Hindi hero + `lang="hi"`; default en. Theme tokens ported from `meta/DESIGN.md` into `app/globals.css` `@theme` (colors/radii/typography helpers). Typed API client matches real backend shape (PlanResponse/ContentPack/PATCH tasks `t_w{w}_n{i}` 0-based). `npm run build` + `eslint` clean; commit 7375038._
+
+## Progress log notes (Step 9 details)
+- create-next-app took ~5 min on OneDrive-synced dir; had one earlier ENOSPC retry (resolved by cache move to D:\npm-cache).
+- Next 16 + Turbopack needs explicit `postcss.config.mjs` with `@tailwindcss/postcss` (scaffold ships `@tailwindcss/turbopack` but production build warns "Unknown at rule @theme" without the PostCSS plugin) — fixed.
+- next-intl dynamic import must use relative path `../messages/${locale}.json`; alias `@/../` is not statically analyzable by Turbopack — fixed.
+- npm audit: 4 high-sev findings, all in optional Firebase client chain (`@grpc/grpc-js`); not used by our guest-mode app (backend owns Firestore via Admin SDK). Deferred; documented.
+- npm EBADENGINE warnings: some firebase v26 packages request node>=24; harmless warnings, firebase is lazily imported and optional.
+- create-next-app generated an `AGENTS.md` in frontend/ — left in place.
