@@ -16,10 +16,10 @@ export default function Chip({
       onClick={onClick}
       aria-pressed={selected}
       className={[
-        "h-10 rounded-full px-4 ds-body-sm font-bold leading-none transition-colors",
+        "h-10 rounded-full px-4 ds-body-sm font-bold leading-none transition-colors backdrop-blur-md",
         selected
-          ? "bg-ink-deep text-white" // pill-tab-active
-          : "border border-hairline bg-canvas text-ink",
+          ? "glass-active"
+          : "border border-white/16 bg-white/6 text-ink hover:bg-white/12",
       ].join(" ")}
     >
       {children}

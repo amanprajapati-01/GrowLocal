@@ -41,7 +41,7 @@ export default async function RootLayout({
 
   return (
     <html lang={locale} className={`${inter.variable} ${notoDev.variable}`}>
-      <body className="pb-14 min-h-dvh bg-canvas text-ink antialiased sm:pb-0">
+      <body className="pb-20 min-h-dvh bg-canvas text-ink antialiased sm:pb-0">
         <NextIntlClientProvider messages={messages}>
           <ToastProvider>
             {children}

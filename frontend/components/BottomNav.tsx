@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import { Home, NotebookText, Sparkles } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-/** Mobile bottom nav (Home · My plans · New plan) — hidden ≥ 640px per Appflow. */
+/** Floating glass pill dock (Home · My plans · New plan) — hidden ≥ 640px. */
 export default function BottomNav() {
   const t = useTranslations("nav");
   const pathname = usePathname();
@@ -19,10 +19,10 @@ export default function BottomNav() {
 
   return (
     <nav
-      aria-label={t("home")}
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-hairline-soft bg-canvas pb-[env(safe-area-inset-bottom)] sm:hidden"
+      aria-label="primary"
+      className="fixed inset-x-4 bottom-3 z-40 sm:hidden"
     >
-      <div className="mx-auto grid max-w-md grid-cols-3">
+      <div className="glass-pill mx-auto grid max-w-md grid-cols-3 rounded-full px-2 py-1">
         {items.map(({ href, icon: Icon, label }) => {
           const active = pathname === href;
           return (
@@ -30,11 +30,13 @@ export default function BottomNav() {
               key={href}
               href={href}
               className={[
-                "flex h-14 flex-col items-center justify-center gap-0.5 ds-caption-bold",
-                active ? "text-ink-deep" : "text-steel",
+                "relative flex h-12 flex-col items-center justify-center gap-0.5 rounded-full ds-caption-bold transition-colors",
+                active
+                  ? "glass-active"
+                  : "text-steel hover:text-ink",
               ].join(" ")}
             >
-              <Icon size={20} strokeWidth={active ? 2.4 : 1.8} aria-hidden />
+              <Icon size={18} strokeWidth={active ? 2.4 : 1.8} aria-hidden />
               <span>{label}</span>
             </Link>
           );

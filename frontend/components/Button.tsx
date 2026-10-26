@@ -7,16 +7,16 @@ const base =
   "inline-flex items-center justify-center rounded-full font-bold leading-none whitespace-nowrap transition-colors disabled:cursor-not-allowed disabled:opacity-60";
 
 const variants: Record<Variant, string> = {
-  // button-primary: black pill (marketing CTAs)
-  primary: "bg-black text-white active:bg-charcoal disabled:bg-disabled disabled:text-canvas",
-  // button-buy-cta: cobalt pill — plan-generation flow ONLY
-  buy: "bg-primary text-white active:bg-primary-deep disabled:bg-disabled disabled:text-canvas",
-  // button-secondary: 2px ink outline
-  secondary: "border-2 border-ink-deep bg-transparent text-ink-deep active:bg-surface-soft",
-  // button-ghost: quieter 2px 12%-alpha outline
-  ghost: "border-2 border-ink-deep/12 bg-transparent text-ink-deep active:bg-surface-soft",
+  // button-primary: ink pill with specular shine (marketing CTAs)
+  primary: "btn-gloss bg-black text-white active:bg-charcoal disabled:bg-disabled disabled:text-disabled",
+  // button-buy-cta: cobalt pill + halo glow — plan-generation flow ONLY
+  buy: "btn-gloss btn-cobalt-glow bg-primary text-white active:bg-primary-deep disabled:bg-disabled disabled:text-disabled",
+  // button-secondary in aurora world: light glass pill
+  secondary: "bg-white/8 text-ink-deep border border-white/25 backdrop-blur-md active:bg-white/15",
+  // button-ghost: quieter glass
+  ghost: "border border-white/14 bg-white/4 text-ink-deep backdrop-blur-sm active:bg-white/10",
   // button-pill-tab
-  tab: "border border-hairline bg-canvas text-ink active:bg-surface-soft",
+  tab: "border border-white/16 bg-white/6 text-ink backdrop-blur-md active:bg-white/12",
 };
 
 const sizes: Record<Size, string> = {

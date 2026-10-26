@@ -1,60 +1,68 @@
 @import "tailwindcss";
 
 /**
- * GrowLocal design tokens — ported from meta/DESIGN.md.
- * Tailwind v4 CSS-first config: @theme maps --color-* to utilities (bg-*, text-*, border-*)
- * and --radius-* to rounded-*.
+ * GrowLocal design tokens — meta/DESIGN.md base + "Aurora Glass" variant layer.
  *
- * Cobalt (#0064e0) is RESERVED for the in-app plan-generation flow ("buy CTA" analog).
- * Marketing CTAs use ink-black pills. No shadows on marketing cards (elevation = flow signal).
+ * The dark-aurora variant remaps the light-theme token VALUES (names preserved,
+ * so all existing utilities keep working): ink/canvas/steel etc. now describe
+ * text and surfaces on a dark stage. Cobalt (#0064e0) stays reserved for the
+ * in-app plan-generation flow; aurora orbs + violet accent never tint CTAs.
  */
 
 @theme {
-  /* ---- Colors (meta/DESIGN.md colors) ---- */
-  --color-canvas: #ffffff;
-  --color-surface-soft: #f1f4f7;
+  /* ---- Surfaces (dark-world values, light-theme names) ---- */
+  --color-canvas: #05070c; /* page base beneath the aurora */
+  --color-surface-soft: rgba(255, 255, 255, 0.08);
 
-  --color-primary: #0064e0; /* cobalt — plan-generation CTAs ONLY */
+  /* ---- Cobalt discipline unchanged ---- */
+  --color-primary: #0064e0; /* plan-flow CTAs ONLY */
   --color-primary-deep: #0457cb;
   --color-primary-soft: #0091ff;
-  --color-fb-blue: #1876f2; /* selected form-control state */
-  --color-selection: #0143b5; /* radio-option-selected border (2px) */
-  --color-accent: #a121ce; /* oculus purple — sparing data-viz accent */
+  --color-fb-blue: #1876f2;
+  --color-selection: #0143b5; /* selection ring (brightened glow twin below) */
+  --color-selection-glow: #4d9bff;
+  --color-accent: #a121ce; /* oculus purple — sparing data-viz/aurora use */
 
-  --color-ink: #1c1e21;
-  --color-ink-deep: #0a1317;
+  /* ---- Aurora orbs ---- */
+  --color-aurora-1: #0064e0;
+  --color-aurora-2: #a121ce;
+  --color-aurora-3: #00b8a9;
+
+  /* ---- Text (dark world) ---- */
+  --color-ink: #e8eef5;
+  --color-ink-deep: #f6f9fc;
   --color-ink-button: #000000;
-  --color-on-ink: #ffffff;
-  --color-charcoal: #444950;
-  --color-slate: #4b4c4f;
-  --color-steel: #5d6c7b;
-  --color-stone: #8595a4;
-  --color-disabled: #bcc0c4;
+  --color-charcoal: #c9d3de;
+  --color-slate: #b9c5d1;
+  --color-steel: #9fb0c0;
+  --color-stone: #7d90a2;
+  --color-disabled: #5b6675;
 
-  --color-hairline: #ced0d4;
-  --color-hairline-soft: #dee3e9;
+  /* ---- Lines ---- */
+  --color-hairline: #93a1b1;
+  --color-hairline-soft: rgba(255, 255, 255, 0.14);
 
+  /* ---- Semantic (brightened for dark) ---- */
   --color-success: #31a24c;
   --color-attention: #f2a918;
   --color-warning: #f7b928;
   --color-critical: #e41e3f;
-  --color-critical-strong: #f0284a;
+  --color-critical-strong: #ff5470;
 
   /* ---- Radii (meta/DESIGN.md rounded) ---- */
   --radius-xs: 2px;
   --radius-sm: 4px;
   --radius-md: 6px;
   --radius-lg: 8px;
-  --radius-xl: 16px; /* standard feature cards, accordion items */
-  --radius-2xl: 24px; /* warranty/accessory tiles */
-  --radius-3xl: 32px; /* photographic feature cards, promo strips */
-  --radius-4xl: 40px; /* hero panels */
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-3xl: 32px;
+  --radius-4xl: 40px;
 
   /* ---- Fonts (next/font CSS variables wired in layout.tsx) ---- */
   --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
   --font-devanagari: var(--font-noto-dev), var(--font-inter), system-ui, sans-serif;
 
-  /* ---- Breakpoint: mobile-first at 360px; sm jumps straight to tablet group ---- */
   --breakpoint-xs: 480px;
 }
 
@@ -71,6 +79,8 @@
     color: var(--color-ink);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    min-height: 100dvh;
+    isolation: isolate;
   }
 
   /* Hindi UI chrome uses the Devanagari face for cleaner conjuncts */
@@ -78,15 +88,192 @@
     font-family: var(--font-devanagari);
   }
 
+  /* ---- Aurora stage: three pre-blurred glow orbs on one fixed layer (GPU-cheap) ---- */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: -25%;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(42% 42% at 18% 22%, rgba(0, 100, 224, 0.34), transparent 70%),
+      radial-gradient(38% 38% at 82% 16%, rgba(161, 33, 206, 0.22), transparent 70%),
+      radial-gradient(50% 50% at 70% 88%, rgba(0, 184, 169, 0.15), transparent 72%);
+    animation: aurora-drift 80s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+
+  /* Noise + vignette texture above the orbs, below content */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.55;
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/></svg>"),
+      radial-gradient(130% 130% at 50% 0%, transparent 55%, rgba(2, 4, 8, 0.6));
+  }
+
   :focus-visible {
-    outline: 2px solid var(--color-fb-blue);
+    outline: 2px solid var(--color-selection-glow);
     outline-offset: 2px;
   }
 }
 
-/* ---------------- Typography helper classes (DESIGN.md hierarchy) ---------------- */
+@keyframes aurora-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(2%, -2%, 0) scale(1.06) rotate(4deg);
+  }
+  100% {
+    transform: translate3d(-2%, 2%, 0) scale(1.02) rotate(-3deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    animation: none;
+  }
+}
+
+/* ---------------- Glass surfaces ---------------- */
 
 @layer components {
+  /**
+   * Frosted glass on dark. One backdrop-filter per visible layer;
+   * nested panels use .glass-solid (no blur) to avoid blur-in-blur cost.
+   */
+  .glass {
+    background: linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.13),
+      rgba(255, 255, 255, 0.055)
+    );
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.25),
+      0 8px 32px rgba(2, 6, 12, 0.35);
+  }
+
+  /** Dense / nested panel: no backdrop-filter (cheap), still glassy. */
+  .glass-solid {
+    background: rgba(10, 16, 24, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.12),
+      0 4px 16px rgba(2, 6, 12, 0.3);
+  }
+
+  /** Chrome only: sticky bars, docks, toggles. */
+  .glass-pill {
+    background: linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.16),
+      rgba(255, 255, 255, 0.07)
+    );
+    -webkit-backdrop-filter: blur(14px) saturate(150%);
+    backdrop-filter: blur(14px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.3),
+      0 6px 24px rgba(2, 6, 12, 0.35);
+  }
+
+  /** Active/selected state for glass pills and chips. */
+  .glass-active {
+    background: linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0.3),
+      rgba(255, 255, 255, 0.14)
+    );
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.4),
+      0 0 18px rgba(77, 155, 255, 0.28);
+    color: #ffffff;
+  }
+
+  /** Dark hero panel with space for glow orbs behind glass cards. */
+  .glass-hero {
+    background:
+      radial-gradient(70% 90% at 85% 0%, rgba(0, 100, 224, 0.25), transparent 65%),
+      radial-gradient(50% 70% at 10% 100%, rgba(161, 33, 206, 0.18), transparent 70%),
+      linear-gradient(160deg, rgba(13, 22, 34, 0.72), rgba(5, 9, 15, 0.85));
+    -webkit-backdrop-filter: blur(10px) saturate(140%);
+    backdrop-filter: blur(10px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.2),
+      0 16px 48px rgba(2, 6, 12, 0.5);
+  }
+
+  /* Fallback: no backdrop-filter support → nearly opaque surfaces */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .glass,
+    .glass-pill {
+      background: rgba(16, 24, 34, 0.94);
+    }
+    .glass-hero {
+      background: linear-gradient(160deg, rgba(13, 22, 34, 0.97), rgba(5, 9, 15, 0.98));
+    }
+  }
+
+  /* ---------------- Dark-world form fields ---------------- */
+
+  .field {
+    height: 2.75rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.05);
+    padding-inline: 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--color-ink);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .field::placeholder {
+    color: var(--color-stone);
+  }
+
+  .field:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 1.5px var(--color-selection-glow);
+    border-color: var(--color-selection-glow);
+  }
+
+  /* ---------------- Button treatments ---------------- */
+
+  /** Specular top-edge shine for ink pills. */
+  .btn-gloss {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-gloss::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 55%);
+    pointer-events: none;
+  }
+
+  /** Cobalt halo for the plan-flow buy CTA only. */
+  .btn-cobalt-glow {
+    box-shadow:
+      0 10px 30px rgba(0, 100, 224, 0.42),
+      inset 0 1px 0 rgba(255, 255, 255, 0.32);
+  }
+
+  /* ---------------- Typography helper classes (DESIGN.md hierarchy) ---------------- */
+
   .ds-display {
     font-weight: 500;
     line-height: 1.17;

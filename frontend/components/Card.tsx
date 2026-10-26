@@ -1,17 +1,17 @@
 type CardProps = {
   children: React.ReactNode;
   className?: string;
-  /** "feature" = card-icon-feature (16px, border, 24px pad); "promo" = dark strip; "soft" = surface-soft 24px tile */
-  variant?: "feature" | "promo" | "soft";
+  /** "feature" = frosted glass tile; "solid" = nested dense panel (no double blur); "hero" = dark aurora hero */
+  variant?: "feature" | "solid" | "hero";
 };
 
 const styles: Record<string, string> = {
-  feature: "rounded-xl border border-hairline-soft bg-canvas p-6",
-  promo: "rounded-3xl bg-ink-deep p-8 text-white sm:p-16",
-  soft: "rounded-2xl bg-surface-soft p-8",
+  feature: "glass rounded-xl p-6",
+  solid: "glass-solid rounded-xl p-6",
+  hero: "glass-hero rounded-3xl p-8 sm:p-16 text-white",
 };
 
-/** Card container per meta/DESIGN.md (flat — no shadow on marketing cards). */
+/** Card container — flat glass per the Aurora Glass variant layer (no marketing shadows). */
 export default function Card({ variant = "feature", className = "", children }: CardProps) {
   return <section className={[styles[variant], className].filter(Boolean).join(" ")}>
     {children}
