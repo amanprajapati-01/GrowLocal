@@ -18,6 +18,8 @@
   --color-primary-deep: #0457cb;
   --color-primary-soft: #0091ff;
   --color-fb-blue: #1876f2; /* selected form-control state */
+  --color-selection: #0143b5; /* radio-option-selected border (2px) */
+  --color-accent: #a121ce; /* oculus purple — sparing data-viz accent */
 
   --color-ink: #1c1e21;
   --color-ink-deep: #0a1317;
