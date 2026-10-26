@@ -57,7 +57,9 @@ export default function TaskItem({
     <div
       className={[
         "flex items-start gap-3 rounded-lg border p-3 transition-colors duration-150",
-        checked ? "border-success/40 bg-surface-soft" : "border-hairline-soft bg-canvas",
+        checked
+          ? "border border-success/50 bg-success/10"
+          : "glass-solid",
       ].join(" ")}
     >
       <input

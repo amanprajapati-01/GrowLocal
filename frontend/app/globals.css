@@ -242,6 +242,11 @@
     color: var(--color-stone);
   }
 
+  /* Textareas inherit .field visuals but size by rows, not fixed height */
+  textarea.field {
+    height: auto;
+  }
+
   .field:focus-visible {
     outline: none;
     box-shadow: 0 0 0 1.5px var(--color-selection-glow);

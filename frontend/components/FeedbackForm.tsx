@@ -115,8 +115,10 @@ export default function FeedbackForm({ planId }: { planId: string }) {
                   aria-pressed={active}
                   onClick={() => setChannelId(id)}
                   className={[
-                    "h-10 rounded-full px-4 ds-body-sm font-bold leading-none",
-                    active ? "bg-ink-deep text-white" : "border border-hairline bg-canvas text-ink",
+                    "h-10 rounded-full px-4 ds-body-sm font-bold leading-none backdrop-blur-md transition-colors",
+                    active
+                      ? "glass-active"
+                      : "border border-white/16 bg-white/6 text-ink hover:bg-white/12",
                   ].join(" ")}
                 >
                   {name}
@@ -136,10 +138,10 @@ export default function FeedbackForm({ planId }: { planId: string }) {
                 aria-pressed={outcome === o.value}
                 onClick={() => setOutcome(o.value)}
                 className={[
-                  "h-11 rounded-lg px-3 ds-body-sm font-bold",
+                  "h-11 rounded-lg px-3 ds-body-sm font-bold transition-[border,box-shadow] duration-150",
                   outcome === o.value
-                    ? "border-2 border-selection text-ink-deep"
-                    : "border border-ink-deep/12 bg-canvas text-ink",
+                    ? "border-2 border-selection-glow bg-white/6 text-ink-deep shadow-[0_0_18px_rgba(0,100,224,0.25)]" // aurora selection glow
+                    : "border border-white/14 glass-solid text-ink",
                 ].join(" ")}
               >
                 {t(o.key)}
@@ -159,7 +161,7 @@ export default function FeedbackForm({ planId }: { planId: string }) {
             placeholder={t("notePlaceholder")}
             rows={3}
             maxLength={200}
-            className="rounded-lg border border-hairline bg-canvas px-3 py-2 ds-body text-ink placeholder:text-stone focus:border-2 focus:border-fb-blue focus:outline-none"
+            className="field"
           />
         </div>
 

@@ -33,7 +33,7 @@ export default function WeekAccordion({
               type="button"
               onClick={() => setOpen(expanded ? 0 : week.week)}
               aria-expanded={expanded}
-              className="flex w-full items-center justify-between gap-3 bg-canvas p-6 text-left"
+              className="flex w-full items-center justify-between gap-3 bg-transparent p-6 text-left"
             >
               <span className="flex min-w-0 flex-col gap-1">
                 <span className="ds-subtitle-lg text-ink-deep">

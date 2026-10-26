@@ -118,10 +118,10 @@ export default function ContentStudio({ planId, language }: Props) {
             aria-selected={tab === x.key}
             onClick={() => setTab(x.key)}
             className={[
-              "h-10 rounded-full px-4 ds-body-sm font-bold leading-none transition-colors",
+              "h-10 rounded-full px-4 ds-body-sm font-bold leading-none backdrop-blur-md transition-colors",
               tab === x.key
-                ? "bg-ink-deep text-white"
-                : "border border-hairline bg-canvas text-ink",
+                ? "glass-active"
+                : "border border-white/16 bg-white/6 text-ink hover:bg-white/12",
             ].join(" ")}
           >
             {t(x.label)}
@@ -130,7 +130,7 @@ export default function ContentStudio({ planId, language }: Props) {
         <button
           type="button"
           onClick={() => void regenerate(tab)}
-          className="h-10 rounded-full border-2 border-ink-deep/12 px-4 ds-body-sm font-bold text-ink-deep"
+          className="h-10 rounded-full border border-white/14 bg-white/4 px-4 ds-body-sm font-bold text-ink-deep backdrop-blur-sm hover:bg-white/10"
         >
           {tCommon("regenerate")}
         </button>
@@ -151,7 +151,7 @@ export default function ContentStudio({ planId, language }: Props) {
             />
           ))
         ) : (
-          <div className="rounded-xl border border-hairline-soft bg-surface-soft p-8 text-center">
+          <div className="glass rounded-xl p-8 text-center">
             <p className="ds-subtitle-lg text-ink-deep">{t("emptyTitle")}</p>
             <p className="mt-1 text-charcoal ds-body-sm">{t("emptySub")}</p>
           </div>

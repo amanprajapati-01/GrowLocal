@@ -70,7 +70,7 @@ export default function ContentCard({ item, onRegenerate, regenerating }: Props)
               type="button"
               onClick={() => void onRegenerate()}
               disabled={regenerating}
-              className="rounded-full border-2 border-ink-deep/12 px-4 py-2 ds-caption-bold text-ink-deep disabled:opacity-60"
+              className="rounded-full border border-white/14 bg-white/4 px-4 py-2 ds-caption-bold text-ink-deep backdrop-blur-sm hover:bg-white/10 disabled:opacity-60"
             >
               {regenerating ? tCommon("regenerating") : tCommon("regenerate")}
             </button>
@@ -78,7 +78,7 @@ export default function ContentCard({ item, onRegenerate, regenerating }: Props)
           <button
             type="button"
             onClick={() => void copy()}
-            className="rounded-full border border-hairline bg-canvas px-4 py-2 ds-caption-bold text-ink"
+            className="rounded-full border border-white/16 bg-white/6 px-4 py-2 ds-caption-bold text-ink backdrop-blur-md hover:bg-white/12"
           >
             {copied ? tCommon("copied") : tCommon("copy")}
           </button>

@@ -15,7 +15,7 @@ export default function StepperProgress({
     <div className="flex flex-col gap-2" aria-label={t("stepsLabel", { current, total })}>
       <div className="h-1.5 w-full overflow-hidden rounded-full bg-hairline-soft">
         <div
-          className="h-full rounded-full bg-ink-deep transition-[width] duration-200 ease-out"
+          className="h-full rounded-full bg-white transition-[width] duration-200 ease-out shadow-[0_0_12px_rgba(77,155,255,0.6)]"
           style={{ width: `${pct}%` }}
         />
       </div>

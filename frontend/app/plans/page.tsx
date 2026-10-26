@@ -63,7 +63,7 @@ export default function PlansPage() {
 
           {plans?.map((p) => (
             <Link key={p.planId} href={`/plan/${encodeURIComponent(p.planId)}`} className="block">
-              <Card className="flex items-center justify-between gap-3 p-5 transition-colors hover:bg-surface-soft">
+              <Card className="flex items-center justify-between gap-3 p-5 transition-all hover:-translate-y-0.5 hover:shadow-[0_12px_36px_rgba(2,6,12,0.45)]">
                 <div className="min-w-0">
                   <h2 className="truncate ds-subtitle-lg text-ink-deep">
                     {p.businessName || p.businessType}

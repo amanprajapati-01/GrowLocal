@@ -63,7 +63,7 @@ export default function LoginPage() {
         </Card>
 
         {error ? (
-          <p className="mt-4 rounded-lg border border-critical-strong bg-canvas p-3 text-critical-strong ds-body-sm">
+          <p className="glass-solid rounded-lg border-critical-strong/60 p-3 text-critical-strong ds-body-sm">
             {tE(error)}
           </p>
         ) : null}

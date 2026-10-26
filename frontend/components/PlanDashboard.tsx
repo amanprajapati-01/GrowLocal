@@ -20,7 +20,6 @@ import {
   type PlanResponse,
   type ChannelMeta,
 } from "@/lib/api";
-import { formatInr } from "@/lib/format";
 
 const GOAL_LABEL: Record<string, string> = {
   more_walk_ins: "goal_more_walk_ins",
@@ -113,18 +112,24 @@ export default function PlanDashboard({ planId }: { planId: string }) {
 
   return (
     <div className="mx-auto w-full max-w-3xl px-5 pb-24">
-      {/* 1 — Summary header */}
-      <section className="mt-6 rounded-3xl bg-ink-deep px-6 py-8 text-white">
-        <p className="ds-caption-bold text-white/60">
+      {/* 1 — Summary header (aurora glass hero) */}
+      <section className="glass-hero relative mt-6 overflow-hidden rounded-3xl px-6 py-8 text-white">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -right-12 -top-12 h-44 w-44 rounded-full bg-[radial-gradient(circle,rgba(0,100,224,0.45),transparent_70%)] blur-2xl"
+        />
+        <p className="relative ds-caption-bold text-white/60">
           {inputs?.businessName ?? planId} · {t("summaryGoal")}
         </p>
-        <h1 className="mt-1 ds-heading text-white">
-          {formatInr(total)} {locale === "hi" ? "का प्लान" : "plan"}
+        <h1 className="relative mt-1 ds-heading text-white">
+          {tPlans("budgetLabel", { amount: total.toLocaleString("en-IN") })}
           {inputs?.goal ? ` · ${tW(GOAL_LABEL[inputs.goal] ?? "goal_more_walk_ins")}` : ""}
         </h1>
-        {inputs?.city ? <p className="mt-1 text-white/70 ds-body-sm">{inputs.city}</p> : null}
+        {inputs?.city ? (
+          <p className="relative mt-1 text-white/70 ds-body-sm">{inputs.city}</p>
+        ) : null}
         {plan.modelUsed && plan.modelUsed !== "gemini" ? (
-          <Badge variant="warning" className="mt-3">{t("aiNote")}</Badge>
+          <Badge variant="warning" className="relative mt-3">{t("aiNote")}</Badge>
         ) : null}
       </section>
 
@@ -232,7 +237,7 @@ export default function PlanDashboard({ planId }: { planId: string }) {
       </p>
 
       {/* 8 — CTA bar */}
-      <section className="my-10 rounded-3xl border border-hairline-soft bg-surface-soft p-6">
+      <section className="glass my-10 rounded-3xl p-6">
         <h2 className="ds-subtitle-lg text-ink-deep">{t("shareTitle")}</h2>
         <div className="mt-4 flex flex-col gap-3">
           <ButtonLink href={`/plan/${plan.planId}/content`} variant="buy" className="w-full sm:w-auto">
@@ -271,7 +276,7 @@ function PersonaList({ title, items }: { title: string; items: string[] }) {
       <span className="ds-caption-bold text-steel">{title}</span>
       <ul className="mt-1 flex flex-wrap gap-2">
         {items.map((x, i) => (
-          <li key={i} className="rounded-full border border-hairline px-3 py-1 ds-body-sm text-ink">
+          <li key={i} className="rounded-full border border-white/16 bg-white/6 px-3 py-1 ds-body-sm text-ink">
             {x}
           </li>
         ))}
