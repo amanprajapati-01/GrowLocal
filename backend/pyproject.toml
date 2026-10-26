@@ -1,0 +1,26 @@
+[project]
+name = "growlocal-backend"
+version = "0.1.0"
+description = "GrowLocal API — AI marketing strategy advisor for local businesses"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["app", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "UP", "B", "SIM"]
+ignore = [
+    "E501",
+    "UP042", # str-Enum pattern kept for py3.11 compatibility (StrEnum is 3.11+ in stdlib)
+    "UP017", # datetime.timezone.utc kept for clarity across files
+]
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
