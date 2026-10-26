@@ -55,10 +55,10 @@
 | [ ] | T-045 | Plan dashboard (persona, channels, budget chart) | P0 | A |
 | [ ] | T-046 | 30-day plan with checkable tasks | P0 | A |
 | [ ] | T-047 | Content studio (copy + WhatsApp link) | P0 | A |
-| [ ] | T-048 | Google sign-in + guest mode | P1 | A |
-| [ ] | T-049 | My Plans page | P1 | A |
-| [ ] | T-050 | Festivals + competitors sections | P1 | A |
-| [ ] | T-051 | Feedback screen | P1 | A |
+| [~] | T-048 | Google sign-in + guest mode *(guest verified live; Google needs Firebase project — T-002)* | P1 | A |
+| [ ] | T-049 | My Plans page *(built Step 11; per-user listing verified)* | P1 | A |
+| [x] | T-050 | Festivals + competitors sections *(festivals filter by business type — verified bakery≠coaching; competitors card + graceful empty states `3b369e3`)* | P1 | A |
+| [x] | T-051 | Feedback screen *(Step 11 built; Step 13 fixed outcome contract per Schema.md)* | P1 | A |
 | [ ] | T-052 | Voice input (hi-IN) | P2 | A |
 | [ ] | T-053 | Share plan | P2 | A |
 
@@ -122,3 +122,4 @@
 - _2026-10-26 16:40 — Aurora Glass redesign (user-approved, 3 commits): (1) `f62a017` tokens + aurora stage + chrome (TopBar glass strip, BottomNav floating dock, dark-glass Toast, LanguageToggle/Chip glass pills, Button specular/cobalt-glow, Card variants); (2) `38df815` landing hero + wizard + generating + error/empty/not-found; (3) `7c41b59` dashboard glass hero + content studio/tabs/cards + feedback form + login + plans hover-lift + skeleton; added `textarea.field` rule. tsc/eslint/build clean after each commit. Tracker decision note added._
 - _2026-10-26 17:15 — Step 12 complete: backend `pytest -q` 43 passed; frontend eslint + `next build` clean. QA matrix `backend/scripts/qa_matrix.py`: 3 business types (bakery/salon/coaching) × en/hi × ₹0/₹3k/₹20k + 6 content packs = **1581 checks, all pass** (budget invariant `items+buffer==totalInr≤budget`, ₹50 grid, zero-budget → free-only, catalogue membership, 4-week task geometry `t_w{w}_n{i}`, no HTML/raw markup in copy, Devanagari present in all hi plans/packs, pack structure whatsapp/IG/GBP/offers). Ran with backend restarted at `PLANS_PER_USER_PER_DAY=200` (dev) so 18 plan POSTs don't 429; memory store (fresh state). Step 12.3 live-Gemini skipped — key placeholder → Bug B-002._
 - _2026-10-26 17:10 — UI eyeball live on :3000: aurora/glass renders on landing (:200, `glass-hero` present), E2E flow re-verified earlier in Step 11; real-device pass still pending (T-064)._
+- _2026-10-26 18:05 — Step 13 (P1) complete: (1) Firebase Auth code-complete w/ guest fallback; real sign-in blocked on project keys (T-002) → B-003 scope via user. (2) Festivals: backend filters by `relevantTypes` per business type — live-verified (bakery: Diwali/Bhai Dooj/Wedding Season/Christmas vs coaching: Diwali only). (3) NEW `CompetitorsCard` on the plan dashboard: device geolocation → `GET /api/places`, glass UI, en/hi copy, graceful denied/key-missing/empty states (endpoint smoke: `{competitors:[], note}` without key). (4) Feedback loop: found real contract bug — UI sent `neutral|did_not_work`, Schema.md/backend allow `worked|partial|didnt`; fixed frontend (`lib/api.ts`, FeedbackForm), added `test_feedback_summary_surfaces_correctly` (asserts 422 on bad enum + summary lists worked/didnt channels); rule-based fallback does not personalize (documented limitation, AI path receives FEEDBACK token). (5) Rate-limit messaging verified (`rate_limited`→`rateLimited` copy in en+hi). Added `frontend/.env.example`. Backend 44/44 pytest; frontend tsc/eslint/build clean. Commit `3b369e3`._
