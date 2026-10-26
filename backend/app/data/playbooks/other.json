@@ -1,0 +1,21 @@
+{
+  "businessType": "other",
+  "tips": [
+    "First lock the basics: complete Google Business Profile, an active WhatsApp Business number, and one clear offer.",
+    "Pick ONE channel for the first month and do it consistently — depth beats scattered effort.",
+    "Photograph real work, real faces, real products — locally relevant content beats generic stock.",
+    "Ask your first 20 customers for Google reviews and WhatsApp opt-ins; that list is your launchpad.",
+    "Repeat what brings walk-ins; drop what doesn't within 3-4 weeks."
+  ],
+  "bestChannels": ["google_business_profile", "whatsapp_business", "facebook_local_groups", "google_reviews_drive"],
+  "commonMistakes": [
+    "Trying every platform in week one and abandoning all by week three.",
+    "Promoting without a clear offer or next step.",
+    "No way to contact you discovered from your posts."
+  ],
+  "exampleOffers": [
+    "First-visit trial or sample at a token price.",
+    "'Found us on Google' mention bonus for new customers.",
+    "Neighbourhood loyalty card: buy 5, get the 6th discounted."
+  ]
+}

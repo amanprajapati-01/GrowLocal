@@ -1,0 +1,21 @@
+{
+  "businessType": "bakery",
+  "tips": [
+    "Post a short Reel of the day's bestseller coming out of the oven — bakery content performs well without editing polish.",
+    "Share a 'fresh at 4 PM' WhatsApp broadcast to subscribed regulars.",
+    "Keep Google Business Profile photos fresh: menu board, counter, and today's cakes.",
+    "Tie up with nearby schools, offices or cafes for celebration-cake orders in bulk.",
+    "Ask happy customers at pickup for a quick Google review with a QR code card at the counter."
+  ],
+  "bestChannels": ["instagram_reels", "whatsapp_business", "google_business_profile", "influencer_micro", "google_reviews_drive"],
+  "commonMistakes": [
+    "Posting only cake photos with no price or order instruction.",
+    "Ignoring WhatsApp — repeat orders are the core of bakery revenue.",
+    "Running festival specials without announcing them in advance."
+  ],
+  "exampleOffers": [
+    "Buy 2 get 1 free on selected items during the 4-6 PM window.",
+    "Early-order discount on festival hampers booked 3 days ahead.",
+    "Free birthday candle + name plate with every custom cake."
+  ]
+}

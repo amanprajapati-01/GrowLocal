@@ -1,0 +1,21 @@
+{
+  "businessType": "kirana",
+  "tips": [
+    "Start a WhatsApp broadcast list the moment a regular buys something — one new number a day grows fast.",
+    "Keep your Google Business Profile hours, phone number and item list updated; add photos of stocked shelves weekly.",
+    "Announce daily or weekly specials on WhatsApp Status — regulars check it more than you think.",
+    "Tie up with nearby offices or societies for monthly bulk orders with home delivery.",
+    "Offer a small fixed discount when a customer refers a neighbour who shops with you."
+  ],
+  "bestChannels": ["whatsapp_business", "google_business_profile", "facebook_local_groups", "flyers_local", "referral_offer"],
+  "commonMistakes": [
+    "Paying for ads before your Google listing and WhatsApp list are active.",
+    "Only promoting during festivals instead of weekly touchpoints.",
+    "No updated phone number or timings on Google — people walk away."
+  ],
+  "exampleOffers": [
+    "Month-end essentials combo at a small saving, announced on WhatsApp the day before.",
+    "Refer a neighbour and both get ₹50 off purchases above ₹500.",
+    "Free home delivery for orders above ₹1,000 within 2 km."
+  ]
+}

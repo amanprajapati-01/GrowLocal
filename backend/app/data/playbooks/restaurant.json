@@ -1,0 +1,21 @@
+{
+  "businessType": "restaurant",
+  "tips": [
+    "Reels of a signature dish being plated drive hungry local viewers to Maps.",
+    "Post daily specials in local area Facebook and WhatsApp groups before lunch and dinner hours.",
+    "List your menu on your Google Business Profile with prices, and keep timings accurate.",
+    "Partner with offices nearby for weekday lunch-bundle flyers or messages.",
+    "Run a reviews drive: a table-top card that asks for a Google review."
+  ],
+  "bestChannels": ["instagram_reels", "google_business_profile", "facebook_local_groups", "whatsapp_business", "meta_local_ads"],
+  "commonMistakes": [
+    "Boosted posts with no location targeting set to a tight radius.",
+    "Menu invisible on Google — diners check before they walk in.",
+    "Not answering Google reviews, especially critical ones."
+  ],
+  "exampleOffers": [
+    "Weekday lunch thali combo announced the same morning on WhatsApp.",
+    "Kids-eat-free Sunday family offer for dine-in.",
+    "Free dessert with a check-in or Google review."
+  ]
+}

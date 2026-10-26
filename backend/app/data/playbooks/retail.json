@@ -1,0 +1,21 @@
+{
+  "businessType": "retail",
+  "tips": [
+    "New-stock Reels with a clear price and 'visit before it's gone' line drive local footfall.",
+    "Announce every new collection to your WhatsApp broadcast list first.",
+    "Keep your Google listing category and hours right; add street photos so people can find you.",
+    "Season transitions (summer, winter, festivals) are your promo calendar — plan 3-4 weeks ahead.",
+    "Fashion or electronics micro-influencers in your city can showcase new arrivals cheaply."
+  ],
+  "bestChannels": ["instagram_reels", "whatsapp_business", "google_business_profile", "influencer_micro", "flyers_local"],
+  "commonMistakes": [
+    "Photographing shelves poorly — dark, cluttered photos lose buyers.",
+    "No stock updates on WhatsApp after announcing a 'new collection'.",
+    "Discounting randomly instead of planning a sale calendar."
+  ],
+  "exampleOffers": [
+    "New-arrival preview for WhatsApp subscribers one day before the rack opens.",
+    "Combo pricing on seasonal basics (e.g., winter wear pairs).",
+    "Exchange/loyalty credit for old items during festive sales."
+  ]
+}

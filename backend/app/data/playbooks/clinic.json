@@ -1,0 +1,21 @@
+{
+  "businessType": "clinic",
+  "tips": [
+    "Your Google Business Profile IS your front door: timings, services, photos, insurance/cashless info if any.",
+    "Publish simple health-awareness posts for local seasonal ailments — helpful, not Fear-based.",
+    "A gentle reviews drive at checkout builds long-term trust; never incentivise reviews.",
+    "WhatsApp reminders for follow-up visits keep patients returning.",
+    "Tie-ups with nearby pharmacies or gyms can bring relevant footfall."
+  ],
+  "bestChannels": ["google_business_profile", "google_reviews_drive", "whatsapp_business", "facebook_local_groups"],
+  "commonMistakes": [
+    "Run-of-the-mill paid ads without verifying medical advertising rules first.",
+    "No clinic photos or updated timings on Google — patients skip unverified listings.",
+    "Cold messaging strangers about symptoms or cures — avoid aggressive health marketing."
+  ],
+  "exampleOffers": [
+    "Free blood-pressure or sugar check camp on one weekend a month.",
+    "Follow-up visit reminder with a small priority slot on WhatsApp.",
+    "Family health-check package during seasonal change weekends."
+  ]
+}

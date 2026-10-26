@@ -1,0 +1,21 @@
+{
+  "businessType": "salon",
+  "tips": [
+    "Before/after Reels are your strongest content — always ask permission first.",
+    "Use WhatsApp to fill weekday slow hours with discounts for regulars.",
+    "Keep a booking link and price list in your Instagram bio and Google listing.",
+    "Run a 'bring a friend' offer in the dry weekday hours.",
+    "Festival season (Diwali, weddings) is your peak — plan packages 4-6 weeks ahead."
+  ],
+  "bestChannels": ["instagram_reels", "whatsapp_business", "google_business_profile", "referral_offer", "influencer_micro"],
+  "commonMistakes": [
+    "No price list visible anywhere — people hesitate to walk in.",
+    "Posting only when the shop is slow instead of a fixed weekly rhythm.",
+    "Advertising bridal packages only during the wedding season instead of booking ahead."
+  ],
+  "exampleOffers": [
+    "Weekday 11 AM-4 PM: 20% off full services for appointments booked on WhatsApp.",
+    "Bring a friend and both get a discount on the second service.",
+    "Festival glow package: haircut + facial + threading at a bundled price."
+  ]
+}

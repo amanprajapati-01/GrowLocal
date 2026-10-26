@@ -1,0 +1,233 @@
+{
+  "_comment": "Curated festival/season calendar seeded for the next ~6 months. Dates marked 'verify': true are approximate solar/lunar estimates — confirm against a current calendar before relying on them. recurringRule formats used by the service: 'MM-DD' = every year on that date; 'MM-DD:MM-DD' = every-year date range.",
+  "festivals": [
+    {
+      "id": "dhanteras",
+      "name": "Dhanteras",
+      "nameHi": "धनतेरस",
+      "date": "2026-11-06",
+      "verify": true,
+      "regions": ["all"],
+      "relevantTypes": ["kirana", "retail", "restaurant", "other"],
+      "offerIdeas": [
+        "Dhanteras auspicious-purchase bundle (steelware, utensils, small appliances) with same-day home delivery.",
+        "Lakshmi puja essentials kit announced 3 days ahead on WhatsApp."
+      ]
+    },
+    {
+      "id": "diwali",
+      "name": "Diwali",
+      "nameHi": "दीपावली",
+      "date": "2026-11-08",
+      "verify": true,
+      "regions": ["all"],
+      "relevantTypes": ["kirana", "bakery", "restaurant", "salon", "coaching", "clinic", "retail", "other"],
+      "offerIdeas": [
+        "Diwali gift hampers with pre-order discount for WhatsApp subscribers.",
+        "Festival sparkly cleaning + glow package for salons; advance booking saves more.",
+        "Family feast combo available for pre-order 2 days before Diwali."
+      ]
+    },
+    {
+      "id": "bhai_dooj",
+      "name": "Bhai Dooj",
+      "nameHi": "भाई दूज",
+      "date": "2026-11-10",
+      "verify": true,
+      "regions": ["all"],
+      "relevantTypes": ["kirana", "retail", "bakery", "restaurant"],
+      "offerIdeas": [
+        "Sweet-gift combo boxes ready for same-day pickup.",
+        "Buy-one-gift-get-gift-wrap-free for the day."
+      ]
+    },
+    {
+      "id": "chhath_puja",
+      "name": "Chhath Puja",
+      "nameHi": "छठ पूजा",
+      "date": "2026-11-17",
+      "verify": true,
+      "regions": ["north", "east"],
+      "relevantTypes": ["kirana", "bakery", "retail", "other"],
+      "offerIdeas": [
+        "Puja essentials basket (thekua ingredients, sugarcane, fruits) with early-morning delivery.",
+        "Extended-hours signboard for the 4 festival days shared in area groups."
+      ]
+    },
+    {
+      "id": "christmas",
+      "name": "Christmas",
+      "nameHi": "क्रिसमस",
+      "date": "2026-12-25",
+      "regions": ["all"],
+      "relevantTypes": ["bakery", "restaurant", "retail", "salon", "other"],
+      "offerIdeas": [
+        "Plum cake pre-orders open a week early for WhatsApp subscribers.",
+        "Christmas family dinner special announced in local groups."
+      ]
+    },
+    {
+      "id": "new_year",
+      "name": "New Year",
+      "nameHi": "नव वर्ष",
+      "date": "2027-01-01",
+      "regions": ["all"],
+      "relevantTypes": ["restaurant", "salon", "bakery", "coaching", "retail", "other"],
+      "offerIdeas": [
+        "New-year special menu for 31 Dec evening with advance booking.",
+        "New year new look salon package for the first week.",
+        "Fresh-start New Year enrollment discount for new batches."
+      ]
+    },
+    {
+      "id": "winter_season",
+      "name": "Winter Season",
+      "nameHi": "सर्दियों का मौसम",
+      "recurringRule": "12-01:01-31",
+      "regions": ["north", "central", "east"],
+      "relevantTypes": ["kirana", "retail", "restaurant", "bakery", "other"],
+      "offerIdeas": [
+        "Winter essentials corner: warm items, ghee, dry fruits with a combined price.",
+        "Warm-foods special (soup, gajar halwa, hot beverages) featured daily on Status."
+      ]
+    },
+    {
+      "id": "wedding_season_winter",
+      "name": "Wedding Season",
+      "nameHi": "शादी सीज़न",
+      "recurringRule": "11-20:12-15",
+      "verify": true,
+      "regions": ["all"],
+      "relevantTypes": ["salon", "bakery", "restaurant", "retail", "other"],
+      "offerIdeas": [
+        "Bridal and groom packages booked 2+ weeks ahead save more.",
+        "Large sweets/snack trays for the wedding week with delivery."
+      ]
+    },
+    {
+      "id": "makar_sankranti",
+      "name": "Makar Sankranti / Pongal / Lohri",
+      "nameHi": "मकर संक्रांति / पोंगल / लोहड़ी",
+      "recurringRule": "01-14",
+      "regions": ["all"],
+      "relevantTypes": ["kirana", "retail", "bakery", "restaurant"],
+      "offerIdeas": [
+        "Sesame-gud specialities and til-gud sweets combine.",
+        "Pongal cooking kit (rice, jaggery, cashew) pre-packed basket."
+      ]
+    },
+    {
+      "id": "republic_day",
+      "name": "Republic Day",
+      "nameHi": "गणतंत्र दिवस",
+      "recurringRule": "01-26",
+      "regions": ["all"],
+      "relevantTypes": ["coaching", "retail", "restaurant", "other"],
+      "offerIdeas": [
+        "Republic Day weekend sale combo across categories.",
+        "Tiranga special dish or tricolor dessert for the day."
+      ]
+    },
+    {
+      "id": "board_exam_season",
+      "name": "Board Exam Season",
+      "nameHi": "बोर्ड परीक्षा सीज़न",
+      "recurringRule": "01-15:03-31",
+      "regions": ["all"],
+      "relevantTypes": ["coaching", "other"],
+      "offerIdeas": [
+        "Crash course revision batch starting 6 weeks before exams.",
+        "Doubt-hour extension and a parents' WhatsApp progress update."
+      ]
+    },
+    {
+      "id": "valentines_week",
+      "name": "Valentine's Week",
+      "nameHi": "वैलेंटाइन सप्ताह",
+      "recurringRule": "02-07:02-14",
+      "regions": ["all"],
+      "relevantTypes": ["bakery", "restaurant", "salon", "retail", "other"],
+      "offerIdeas": [
+        "Couple dessert box with a personalised message.",
+        "Date-night table or salon-glow package for couples."
+      ]
+    },
+    {
+      "id": "maha_shivaratri",
+      "name": "Maha Shivaratri",
+      "nameHi": "महाशिवरात्रि",
+      "date": "2027-02-20",
+      "verify": true,
+      "regions": ["all"],
+      "relevantTypes": ["kirana", "restaurant", "other"],
+      "offerIdeas": [
+        "Vrat / fasting-friendly items corner announced locally.",
+        "Late-evening takeaway menu for devotees."
+      ]
+    },
+    {
+      "id": "holi",
+      "name": "Holi",
+      "nameHi": "होली",
+      "date": "2027-03-22",
+      "verify": true,
+      "regions": ["all"],
+      "relevantTypes": ["kirana", "bakery", "restaurant", "salon", "retail", "other"],
+      "offerIdeas": [
+        "Holi hamper: colours, pichkari, gujiya pre-order combo.",
+        "Post-Holi skin-and-hair care package for salons.",
+        "Holi party thali or snack trays for society bookings."
+      ]
+    },
+    {
+      "id": "eid_ul_fitr",
+      "name": "Eid-ul-Fitr",
+      "nameHi": "ईद-उल-फ़ित्र",
+      "date": "2027-03-10",
+      "verify": true,
+      "regions": ["all"],
+      "relevantTypes": ["bakery", "restaurant", "retail", "kirana", "other"],
+      "offerIdeas": [
+        "Sheer khurma and festive-sweets pre-order with delivery slots.",
+        "Eid family feasting combo for home gatherings."
+      ]
+    },
+    {
+      "id": "chaitra_navratri",
+      "name": "Chaitra Navratri",
+      "nameHi": "चैत्र नवरात्रि",
+      "date": "2027-04-08",
+      "verify": true,
+      "regions": ["north", "west", "central"],
+      "relevantTypes": ["kirana", "restaurant", "retail", "other"],
+      "offerIdeas": [
+        "Nine-day vrat specials menu decided in advance.",
+        "Fasting-flour and fruit baskets with a fixed daily price."
+      ]
+    },
+    {
+      "id": "new_session",
+      "name": "New Academic Session",
+      "nameHi": "नया शैक्षणिक सत्र",
+      "recurringRule": "04-01:06-15",
+      "regions": ["all"],
+      "relevantTypes": ["coaching", "other"],
+      "offerIdeas": [
+        "Early-bird enrollment for the new session batch.",
+        "Free orientation + study-plan session for Class 10 and 12 students."
+      ]
+    },
+    {
+      "id": "summer_season",
+      "name": "Summer Season",
+      "nameHi": "गर्मियों का मौसम",
+      "recurringRule": "04-01:05-31",
+      "regions": ["all"],
+      "relevantTypes": ["kirana", "restaurant", "bakery", "retail", "other"],
+      "offerIdeas": [
+        "Cooling essentials corner (cold Drinks mix, squash, buttermilk) bundle.",
+        "Afternoon heat-break snack combo with delivery."
+      ]
+    }
+  ]
+}
