@@ -91,6 +91,36 @@ def test_unknown_plan_404(client):
     assert response.json()["error"]["code"] == "not_found"
 
 
+def test_feedback_summary_surfaces_correctly(client, bakery_request):
+    """P1: what worked / didn't must reach the next plan's prompt summary."""
+    from app.services.plan_service import _summarize_feedback
+    from app.services.store import get_store
+
+    plan = client.post("/api/plan", json=bakery_request).json()
+    worked_channel = plan["channels"][0]["channelId"]
+
+    # reject the old UI values — contract per docs/Schema.md is worked|partial|didnt
+    assert (
+        client.post(
+            "/api/feedback",
+            json={"planId": plan["planId"], "channelId": worked_channel, "outcome": "neutral"},
+        ).status_code
+        == 422
+    )
+
+    for outcome, channel in (("worked", worked_channel), ("didnt", "instagram_organic")):
+        response = client.post(
+            "/api/feedback",
+            json={"planId": plan["planId"], "channelId": channel, "outcome": outcome, "note": ""},
+        )
+        assert response.status_code == 200
+
+    summary = _summarize_feedback(get_store(), "dev-user")
+    assert "worked" in summary.lower() and worked_channel in summary
+    assert "DID NOT WORK" in summary and "instagram_organic" in summary
+
+
+
 def test_bad_task_patch_400(client, bakery_request):
     plan = client.post("/api/plan", json=bakery_request).json()
     response = client.patch(f'/api/plans/{plan["planId"]}/tasks/bogus', json={"done": True})

@@ -10,8 +10,8 @@ import { useToast } from "@/components/Toast";
 
 const OUTCOMES = [
   { key: "outcomeWorked", value: "worked" },
-  { key: "outcomeNeutral", value: "neutral" },
-  { key: "outcomeNotWorked", value: "did_not_work" },
+  { key: "outcomeNeutral", value: "partial" },
+  { key: "outcomeNotWorked", value: "didnt" },
 ] as const;
 
 /** S8 — what worked / didn't; feeds the next plan. */
@@ -65,7 +65,7 @@ export default function FeedbackForm({ planId }: { planId: string }) {
       await postFeedback({
         planId,
         channelId,
-        outcome: outcome as "worked" | "neutral" | "did_not_work",
+        outcome: outcome as "worked" | "partial" | "didnt",
         note: note.trim().slice(0, 200) || undefined,
       });
       setSent(true);

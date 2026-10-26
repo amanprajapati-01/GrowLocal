@@ -8,6 +8,7 @@ import ChannelCard from "@/components/ChannelCard";
 import BudgetChart, { type BudgetSlice } from "@/components/BudgetChart";
 import WeekAccordion from "@/components/WeekAccordion";
 import FestivalChip from "@/components/FestivalChip";
+import CompetitorsCard from "@/components/CompetitorsCard";
 import ErrorState from "@/components/ErrorState";
 import { Skeleton, SkeletonCard } from "@/components/Skeleton";
 import { useToast } from "@/components/Toast";
@@ -231,6 +232,9 @@ export default function PlanDashboard({ planId }: { planId: string }) {
         </section>
       ) : null}
 
+      {/* 7 — Places competitor snapshot (P1) */}
+      <CompetitorsCard businessType={inputs?.businessType ?? ""} />
+
       {/* Disclaimer */}
       <p className="mt-10 border-t border-hairline-soft pt-4 text-steel ds-caption">
         {plan.disclaimer}
@@ -304,7 +308,7 @@ function fallbackMeta(id: string): ChannelMeta {
   return { id, name: { en: id, hi: id }, costType: "paid", effort: "", timeToResult: "" };
 }
 
-type StoredInputs = { businessName?: string; city?: string; goal?: string };
+type StoredInputs = { businessName?: string; city?: string; goal?: string; businessType?: string };
 function readStoredInputs(): StoredInputs | null {
   try {
     const raw = sessionStorage.getItem("growlocal.planRequest");

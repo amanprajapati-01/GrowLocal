@@ -177,8 +177,15 @@ export type ContentPack = {
 export type FeedbackPayload = {
   planId: string;
   channelId: string;
-  outcome: "worked" | "neutral" | "did_not_work";
+  outcome: "worked" | "partial" | "didnt";
   note?: string;
+};
+
+export type Competitor = {
+  name: string;
+  rating: number;
+  reviewCount: number;
+  address: string;
 };
 
 /* ================= Endpoint helpers ================= */
@@ -235,4 +242,24 @@ export function postFeedback(payload: FeedbackPayload) {
     method: "POST",
     json: payload,
   });
+}
+
+/** P1: nearby competitor snapshot (GET /api/places). Empty + note without a Places key. */
+export function getCompetitors(
+  lat: number,
+  lng: number,
+  type = "",
+  radius = 2500,
+  signal?: AbortSignal
+) {
+  const qs = new URLSearchParams({
+    lat: String(lat),
+    lng: String(lng),
+    radius: String(radius),
+  });
+  if (type) qs.set("type", type);
+  return request<{ competitors: Competitor[]; note: string; radiusMeters: number }>(
+    `/api/places?${qs.toString()}`,
+    { signal }
+  );
 }
