@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+/**
+ * GrowLocal design tokens — ported from meta/DESIGN.md.
+ * Tailwind v4 CSS-first config: @theme maps --color-* to utilities (bg-*, text-*, border-*)
+ * and --radius-* to rounded-*.
+ *
+ * Cobalt (#0064e0) is RESERVED for the in-app plan-generation flow ("buy CTA" analog).
+ * Marketing CTAs use ink-black pills. No shadows on marketing cards (elevation = flow signal).
+ */
+
+@theme {
+  /* ---- Colors (meta/DESIGN.md colors) ---- */
+  --color-canvas: #ffffff;
+  --color-surface-soft: #f1f4f7;
+
+  --color-primary: #0064e0; /* cobalt — plan-generation CTAs ONLY */
+  --color-primary-deep: #0457cb;
+  --color-primary-soft: #0091ff;
+  --color-fb-blue: #1876f2; /* selected form-control state */
+
+  --color-ink: #1c1e21;
+  --color-ink-deep: #0a1317;
+  --color-ink-button: #000000;
+  --color-on-ink: #ffffff;
+  --color-charcoal: #444950;
+  --color-slate: #4b4c4f;
+  --color-steel: #5d6c7b;
+  --color-stone: #8595a4;
+  --color-disabled: #bcc0c4;
+
+  --color-hairline: #ced0d4;
+  --color-hairline-soft: #dee3e9;
+
+  --color-success: #31a24c;
+  --color-attention: #f2a918;
+  --color-warning: #f7b928;
+  --color-critical: #e41e3f;
+  --color-critical-strong: #f0284a;
+
+  /* ---- Radii (meta/DESIGN.md rounded) ---- */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 16px; /* standard feature cards, accordion items */
+  --radius-2xl: 24px; /* warranty/accessory tiles */
+  --radius-3xl: 32px; /* photographic feature cards, promo strips */
+  --radius-4xl: 40px; /* hero panels */
+
+  /* ---- Fonts (next/font CSS variables wired in layout.tsx) ---- */
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-devanagari: var(--font-noto-dev), var(--font-inter), system-ui, sans-serif;
+
+  /* ---- Breakpoint: mobile-first at 360px; sm jumps straight to tablet group ---- */
+  --breakpoint-xs: 480px;
+}
+
+/* ---------------- Base ---------------- */
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Hindi UI chrome uses the Devanagari face for cleaner conjuncts */
+  html[lang="hi"] body {
+    font-family: var(--font-devanagari);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-fb-blue);
+    outline-offset: 2px;
+  }
+}
+
+/* ---------------- Typography helper classes (DESIGN.md hierarchy) ---------------- */
+
+@layer components {
+  .ds-display {
+    font-weight: 500;
+    line-height: 1.17;
+    font-size: 2.25rem; /* 36px heading-lg; hero-display 64px is mobile-hostile, mobile-first */
+    letter-spacing: -0.5px;
+  }
+
+  @media (min-width: 768px) {
+    .ds-display {
+      font-size: 3rem; /* 48px display-lg */
+    }
+  }
+
+  .ds-heading {
+    font-weight: 500;
+    line-height: 1.25;
+    font-size: 1.5rem; /* 24px heading-sm */
+  }
+
+  .ds-subhead {
+    font-weight: 300;
+    line-height: 1.21;
+    font-size: 1.75rem; /* 28px heading-md editorial */
+  }
+
+  .ds-subtitle-lg {
+    font-weight: 700;
+    line-height: 1.44;
+    font-size: 1.125rem; /* 18px */
+  }
+
+  .ds-body {
+    font-weight: 400;
+    line-height: 1.5;
+    font-size: 1rem; /* 16px */
+    letter-spacing: -0.01rem;
+  }
+
+  .ds-body-sm {
+    font-weight: 400;
+    line-height: 1.43;
+    font-size: 0.875rem; /* 14px */
+    letter-spacing: -0.00875rem;
+  }
+
+  .ds-caption {
+    font-weight: 400;
+    line-height: 1.33;
+    font-size: 0.75rem; /* 12px */
+  }
+
+  .ds-caption-bold {
+    font-weight: 700;
+    line-height: 1.33;
+    font-size: 0.75rem;
+  }
+}
