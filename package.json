@@ -1,0 +1,12 @@
+{
+  "name": "growlocal",
+  "version": "0.1.0",
+  "private": true,
+  "description": "GrowLocal — AI marketing strategy advisor for local businesses (root helper scripts)",
+  "scripts": {
+    "dev": "npm run dev --prefix frontend",
+    "build": "npm run build --prefix frontend",
+    "lint": "npm run lint --prefix frontend",
+    "start": "npm run start --prefix frontend"
+  }
+}
