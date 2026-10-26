@@ -8,7 +8,7 @@ export default async function NotFound() {
 
   return (
     <main className="mx-auto flex min-h-dvh max-w-md flex-col items-center justify-center gap-4 px-5 text-center">
-      <span aria-hidden className="text-4xl">∩_∩</span>
+      <span aria-hidden className="text-4xl drop-shadow-[0_0_18px_rgba(77,155,255,0.5)]">∩_∩</span>
       <h1 className="ds-heading text-ink-deep">{t("notFound")}</h1>
       <p className="text-charcoal ds-body">{t("generic")}</p>
       <ButtonLink href="/" variant="primary">

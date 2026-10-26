@@ -20,7 +20,7 @@ export default function ErrorState({
   return (
     <div
       role="alert"
-      className="mx-auto flex max-w-md flex-col items-center gap-3 rounded-xl border border-hairline-soft bg-canvas p-8 text-center"
+      className="glass-solid mx-auto flex max-w-md flex-col items-center gap-3 rounded-xl p-8 text-center"
     >
       <span aria-hidden className="text-3xl">:(</span>
       <h2 className="ds-subtitle-lg text-ink-deep">{tCommon("errorTitle")}</h2>
@@ -44,7 +44,7 @@ export function EmptyState({
   action?: React.ReactNode;
 }) {
   return (
-    <div className="mx-auto flex max-w-md flex-col items-center gap-3 rounded-xl border border-hairline-soft bg-surface-soft p-8 text-center">
+    <div className="glass mx-auto flex max-w-md flex-col items-center gap-3 rounded-xl p-8 text-center">
       <span aria-hidden className="text-3xl">☰</span>
       <h2 className="ds-subtitle-lg text-ink-deep">{title}</h2>
       {sub ? <p className="text-charcoal ds-body-sm">{sub}</p> : null}

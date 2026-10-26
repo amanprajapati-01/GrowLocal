@@ -7,7 +7,7 @@ const PRESETS = [0, 1000, 3000, 5000, 10000];
 const MAX = 100000;
 const STEP = 100;
 
-/** Constraint-controlled range input + preset pills + custom amount (Step 3 of S2-3). */
+/** Constraint-controlled range input + preset glass pills + custom amount (Step 3 of S2-3). */
 export default function BudgetSlider({
   value,
   onChange,
@@ -18,9 +18,11 @@ export default function BudgetSlider({
   const t = useTranslations("wizard");
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="glass flex flex-col gap-6 rounded-xl p-6">
       <div className="flex flex-wrap items-baseline gap-x-2">
-        <span className="ds-display text-ink-deep">{formatInr(value)}</span>
+        <span className="ds-display text-white drop-shadow-[0_2px_16px_rgba(77,155,255,0.4)]">
+          {formatInr(value)}
+        </span>
         <span className="ds-body text-steel">{t("budgetCustomLabel")}</span>
       </div>
 
@@ -45,10 +47,10 @@ export default function BudgetSlider({
               onClick={() => onChange(p)}
               aria-pressed={selected}
               className={[
-                "h-10 rounded-full px-4 ds-body-sm font-bold leading-none transition-colors",
+                "h-10 rounded-full px-4 ds-body-sm font-bold leading-none backdrop-blur-md transition-colors",
                 selected
-                  ? "bg-ink-deep text-white"
-                  : "border border-hairline bg-canvas text-ink",
+                  ? "glass-active"
+                  : "border border-white/16 bg-white/6 text-ink hover:bg-white/12",
               ].join(" ")}
             >
               {p === 10000 ? `${t("preset10k")}+` : formatInr(p)}
@@ -73,7 +75,7 @@ export default function BudgetSlider({
             const n = Number(e.target.value);
             if (Number.isFinite(n)) onChange(Math.min(Math.max(0, Math.round(n)), MAX));
           }}
-          className="h-11 rounded-lg border border-hairline bg-canvas px-3 ds-body text-ink focus:border-2 focus:border-fb-blue focus:outline-none"
+          className="field"
         />
       </div>
 

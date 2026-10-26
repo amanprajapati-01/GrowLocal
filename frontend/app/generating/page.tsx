@@ -105,7 +105,7 @@ export default function GeneratingPage() {
         <h1 className="ds-heading text-ink-deep">{tG("title")}</h1>
         <p className="mt-2 text-charcoal ds-body-sm">{tG("sub")}</p>
 
-        <ol className="mt-10 flex flex-col gap-4">
+        <ol className="glass mt-10 flex flex-col gap-4 rounded-xl p-6">
           {STAGES.map((s, i) => {
             const n = i + 1;
             const done = stage > n;
@@ -119,8 +119,8 @@ export default function GeneratingPage() {
                     done
                       ? "border-success bg-success text-white"
                       : active
-                        ? "border-primary text-primary"
-                        : "border-hairline text-stone",
+                        ? "border-white/40 bg-white/10 text-white shadow-[0_0_16px_rgba(77,155,255,0.35)]"
+                        : "border-white/12 text-stone",
                   ].join(" ")}
                 >
                   {done ? "✓" : n}
@@ -128,7 +128,7 @@ export default function GeneratingPage() {
                 <span
                   className={[
                     "ds-body",
-                    done ? "text-charcoal" : active ? "font-bold text-ink-deep" : "text-stone",
+                    done ? "text-charcoal" : active ? "font-bold text-white" : "text-stone",
                   ].join(" ")}
                 >
                   {tG(s)}

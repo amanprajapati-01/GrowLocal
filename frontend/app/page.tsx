@@ -17,12 +17,21 @@ export default async function Home() {
       <TopBar />
 
       <main className="mx-auto w-full max-w-6xl flex-1 px-5 pb-24">
-        {/* Hero — dark promo-strip card with dual CTA (button-primary + secondary) */}
-        <section className="mt-6 rounded-3xl bg-ink-deep px-6 py-12 text-white sm:max-w-3xl sm:px-10 sm:py-16">
-          <h1 className="ds-display text-white">{t("heroTitle")}</h1>
-          <p className="mt-4 max-w-xl text-white/80 ds-body">{t("heroSub")}</p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            {/* In-app generation flow CTA → cobalt buy-cta per DESIGN.md */}
+        {/* Hero — dark aurora glass panel with glow accents + dual CTA */}
+        <section className="glass-hero relative mt-6 overflow-hidden rounded-3xl px-6 py-12 sm:max-w-3xl sm:px-10 sm:py-16">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-[radial-gradient(circle,rgba(0,100,224,0.5),transparent_70%)] blur-2xl"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -bottom-20 -left-10 h-48 w-48 rounded-full bg-[radial-gradient(circle,rgba(161,33,206,0.35),transparent_70%)] blur-2xl"
+          />
+
+          <h1 className="relative text-white ds-display">{t("heroTitle")}</h1>
+          <p className="relative mt-4 max-w-xl text-white/75 ds-body">{t("heroSub")}</p>
+          <div className="relative mt-8 flex flex-wrap items-center gap-3">
+            {/* In-app generation flow CTA → cobalt buy-cta with halo per DESIGN.md */}
             <ButtonLink href="/start" variant="buy">
               {t("ctaStart")}
             </ButtonLink>
@@ -30,10 +39,10 @@ export default async function Home() {
               {t("ctaDemo")}
             </ButtonLink>
           </div>
-          <p className="mt-8 text-white/60 ds-caption">{t("trustLine")}</p>
+          <p className="relative mt-8 text-white/55 ds-caption">{t("trustLine")}</p>
         </section>
 
-        {/* How it works — 3-up icon-feature tiles (1-up mobile, 3-up ≥ sm) */}
+        {/* How it works — 3-up glass tiles (1-up mobile, 3-up ≥ sm) */}
         <section className="mt-12 sm:mt-16">
           <h2 className="ds-heading text-ink-deep">{t("howTitle")}</h2>
           <div className="mt-6 grid gap-4 sm:grid-cols-3">

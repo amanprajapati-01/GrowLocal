@@ -180,7 +180,7 @@ export default function StartPage() {
                     onChange={(e) => patch({ otherDescription: e.target.value })}
                     placeholder={t("otherDescPlaceholder")}
                     maxLength={120}
-                    className="h-11 rounded-lg border border-hairline bg-canvas px-3 ds-body text-ink placeholder:text-stone focus:border-2 focus:border-fb-blue focus:outline-none"
+                    className="field"
                   />
                 </div>
               ) : null}
@@ -198,7 +198,7 @@ export default function StartPage() {
                   placeholder={t("cityPlaceholder")}
                   maxLength={40}
                   aria-label={t("cityLabel")}
-                  className="h-11 rounded-lg border border-hairline bg-canvas px-3 ds-body text-ink placeholder:text-stone focus:border-2 focus:border-fb-blue focus:outline-none"
+                  className="field"
                 />
                 <label
                   htmlFor="locality"
@@ -212,7 +212,7 @@ export default function StartPage() {
                   onChange={(e) => patch({ locality: e.target.value })}
                   placeholder={t("localityPlaceholder")}
                   maxLength={40}
-                  className="h-11 rounded-lg border border-hairline bg-canvas px-3 ds-body text-ink placeholder:text-stone focus:border-2 focus:border-fb-blue focus:outline-none"
+                  className="field"
                 />
               </div>
             </>
@@ -275,7 +275,7 @@ export default function StartPage() {
                   onChange={(e) => patch({ targetAudienceText: e.target.value })}
                   placeholder={t("audienceTextPlaceholder")}
                   maxLength={200}
-                  className="h-11 rounded-lg border border-hairline bg-canvas px-3 ds-body text-ink placeholder:text-stone focus:border-2 focus:border-fb-blue focus:outline-none"
+                  className="field"
                 />
               </div>
             </>
@@ -283,8 +283,8 @@ export default function StartPage() {
         </section>
       </main>
 
-      {/* Sticky action bar: back + next/build */}
-      <div className="fixed inset-x-0 bottom-14 z-30 border-t border-hairline-soft bg-canvas sm:bottom-0">
+      {/* Sticky glass action bar: back + next/build */}
+      <div className="fixed inset-x-0 bottom-14 z-30 glass-pill rounded-none border-x-0 border-b-0 sm:bottom-0">
         <div className="mx-auto flex max-w-2xl items-center justify-between gap-3 px-5 py-3">
           {step > 1 ? (
             <Button variant="ghost" size="sm" onClick={() => setStep((s) => s - 1)}>
