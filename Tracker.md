@@ -68,7 +68,7 @@
 | [ ] | T-060 | Deploy backend to Cloud Run | P0 | needs user |
 | [ ] | T-061 | Deploy frontend to Firebase Hosting | P0 | needs user |
 | [ ] | T-062 | CORS, Firestore rules, indexes | P0 | |
-| [ ] | T-063 | Test matrix (3 types × 2 langs × 3 budgets) | P0 | |
+| [x] | T-063 | Test matrix (3 types × 2 langs × 3 budgets) *(API-geometry matrix via `backend/scripts/qa_matrix.py`: 1581 checks pass; UI eyeball + real-device pending T-064)* | P0 | A+B |
 | [ ] | T-064 | Real-phone test on mobile data | P0 | needs user |
 | [ ] | T-065 | Cloud Run min-instances = 1 for demo | P1 | needs user |
 
@@ -87,6 +87,7 @@
 | ID | Description | Severity | Status | Owner |
 |---|---|---|---|---|
 | B-001 | gcloud + firebase CLI not installed on this machine — deployment prep can proceed; actual deploy needs user. | low | open | user |
+| B-002 | `GEMINI_API_KEY` in backend/.env is whitespace-only → live Gemini unverified (Step 12.3). Mock/rule fallback covers demos until a real key is added. | medium | open | user |
 
 ## Decisions log
 | Date | Decision | Reason |
@@ -119,3 +120,5 @@
 - _2026-10-26 14:20 — Step 10 complete: 20-component design-system library (Button 5 variants, Card, Badge, Chip, ChoiceCard, BudgetSlider+presets+custom, StepperProgress, ChannelCard FREE/₹, BudgetChart (Recharts donut + text legend), TaskItem (optimistic PATCH with rollback), WeekAccordion, ContentCard (copy/regenerate/wa.me), FestivalChip, LanguageToggle, TopBar, BottomNav, Toast, Skeleton, ErrorState/EmptyState). tsc, eslint, next build all clean; commit 453afe2._
 - _2026-10-26 15:05 — Step 11: all 8 P0 screens built and live: landing (hero dual-CTA), /start 5-step wizard (prefill=bakery demo shortcut), /generating (staged progress + real POST + retry), /plan/[id] dashboard (persona, budget donut+channel cards, start-free, weeks w/ optimistic PATCH, festivals, CTA bar), /plan/[id]/content (4 tabs+copy+regen), /plans, /login (guest-first), /plan/[id]/feedback + friendly not-found. Next 16 params=Promise; new react-hooks rules satisfied via .then-chains; router.push instead of location.href. E2E via CORS verified (create/patch/list/content/feedback). Build+lint clean; commit 9d4a472._
 - _2026-10-26 16:40 — Aurora Glass redesign (user-approved, 3 commits): (1) `f62a017` tokens + aurora stage + chrome (TopBar glass strip, BottomNav floating dock, dark-glass Toast, LanguageToggle/Chip glass pills, Button specular/cobalt-glow, Card variants); (2) `38df815` landing hero + wizard + generating + error/empty/not-found; (3) `7c41b59` dashboard glass hero + content studio/tabs/cards + feedback form + login + plans hover-lift + skeleton; added `textarea.field` rule. tsc/eslint/build clean after each commit. Tracker decision note added._
+- _2026-10-26 17:15 — Step 12 complete: backend `pytest -q` 43 passed; frontend eslint + `next build` clean. QA matrix `backend/scripts/qa_matrix.py`: 3 business types (bakery/salon/coaching) × en/hi × ₹0/₹3k/₹20k + 6 content packs = **1581 checks, all pass** (budget invariant `items+buffer==totalInr≤budget`, ₹50 grid, zero-budget → free-only, catalogue membership, 4-week task geometry `t_w{w}_n{i}`, no HTML/raw markup in copy, Devanagari present in all hi plans/packs, pack structure whatsapp/IG/GBP/offers). Ran with backend restarted at `PLANS_PER_USER_PER_DAY=200` (dev) so 18 plan POSTs don't 429; memory store (fresh state). Step 12.3 live-Gemini skipped — key placeholder → Bug B-002._
+- _2026-10-26 17:10 — UI eyeball live on :3000: aurora/glass renders on landing (:200, `glass-hero` present), E2E flow re-verified earlier in Step 11; real-device pass still pending (T-064)._
