@@ -4,7 +4,7 @@
 
 **Legend:** P0 must · P1 nice · P2 stretch · Owner = A (Frontend) / B (Backend) / C (AI/Content) / D (Pitch/QA)
 
-**Status snapshot:** Phase 1 done (backend core working with dev switches) · Overall: ~50% · Blockers: none · Last updated: 2026-10-26
+**Status snapshot:** Phases 1–4 done (build + QA + P1 + deploy prep) · Overall: ~75% · Blockers: none for local demo; keys/CLI for cloud deploys · Last updated: 2026-10-26
 
 ---
 
@@ -67,7 +67,7 @@
 |---|---|---|---|---|
 | [ ] | T-060 | Deploy backend to Cloud Run | P0 | needs user |
 | [ ] | T-061 | Deploy frontend to Firebase Hosting | P0 | needs user |
-| [ ] | T-062 | CORS, Firestore rules, indexes | P0 | |
+| [x] | T-062 | CORS, Firestore rules, indexes *(configs written & committed; deploy itself needs user keys/CLI)* | P0 | B |
 | [x] | T-063 | Test matrix (3 types × 2 langs × 3 budgets) *(API-geometry matrix via `backend/scripts/qa_matrix.py`: 1581 checks pass; UI eyeball + real-device pending T-064)* | P0 | A+B |
 | [ ] | T-064 | Real-phone test on mobile data | P0 | needs user |
 | [ ] | T-065 | Cloud Run min-instances = 1 for demo | P1 | needs user |
@@ -79,7 +79,7 @@
 | [~] | T-071 | Backup demo video *(script ready; recording needs user)* | P0 | user |
 | [ ] | T-072 | Pitch deck (5–6 slides) | P0 | |
 | [ ] | T-073 | Rehearse 3-minute pitch ×2 | P0 | |
-| [ ] | T-074 | README with setup + architecture | P1 | B |
+| [x] | T-074 | README with setup + architecture | P1 | B |
 
 ---
 
@@ -122,5 +122,7 @@
 - _2026-10-26 16:40 — Aurora Glass redesign (user-approved, 3 commits): (1) `f62a017` tokens + aurora stage + chrome (TopBar glass strip, BottomNav floating dock, dark-glass Toast, LanguageToggle/Chip glass pills, Button specular/cobalt-glow, Card variants); (2) `38df815` landing hero + wizard + generating + error/empty/not-found; (3) `7c41b59` dashboard glass hero + content studio/tabs/cards + feedback form + login + plans hover-lift + skeleton; added `textarea.field` rule. tsc/eslint/build clean after each commit. Tracker decision note added._
 - _2026-10-26 17:15 — Step 12 complete: backend `pytest -q` 43 passed; frontend eslint + `next build` clean. QA matrix `backend/scripts/qa_matrix.py`: 3 business types (bakery/salon/coaching) × en/hi × ₹0/₹3k/₹20k + 6 content packs = **1581 checks, all pass** (budget invariant `items+buffer==totalInr≤budget`, ₹50 grid, zero-budget → free-only, catalogue membership, 4-week task geometry `t_w{w}_n{i}`, no HTML/raw markup in copy, Devanagari present in all hi plans/packs, pack structure whatsapp/IG/GBP/offers). Ran with backend restarted at `PLANS_PER_USER_PER_DAY=200` (dev) so 18 plan POSTs don't 429; memory store (fresh state). Step 12.3 live-Gemini skipped — key placeholder → Bug B-002._
 - _2026-10-26 17:10 — UI eyeball live on :3000: aurora/glass renders on landing (:200, `glass-hero` present), E2E flow re-verified earlier in Step 11; real-device pass still pending (T-064)._
-- _2026-10-26 18:35 — Step 14 (deployment prep) complete, nothing run needing credentials: `backend/Dockerfile` (python-3.13-slim, non-root uid 10001, uvicorn on `$PORT`, layered requirements→app incl. seed/prompts) + `.dockerignore`; `firestore.rules` from Schema.md §5 (read-own for plans, backend-only writes, append-only feedback, public catalogs) + `firestore.indexes.json` trimmed to the ONE real composite (plans ownerUid+createdAt desc — verified against FirestoreStore queries); `firebase.json` + `.firebaserc` (placeholder `growlocal-demo`); FE hosting choice = **Firebase App Hosting** (`frontend/apphosting.yaml`) because static export can't serve dynamic /plan/[id] + cookie-locale SSR; README rewritten (architecture diagram, env tables, deploy commands incl. Cloud Run source-deploy one-liner, 3-min demo script, known limitations). Commit `a8f74dc`. Actual deploys pending user keys (B-002, gcloud CLI absent B-001)._
+- _2026-10-26 18:35 — Step 14 (deployment prep) complete, nothing run needing credentials: `backend/Dockerfile` (python-3.13-slim, non-root uid 10001, uvicorn on `$PORT`, layered requirements→app incl. seed/prompts) + `.dockerignore`; `firestore.rules` from Schema.md §5 (read-own for plans, backend-only writes, append-only feedback, public catalogs) + `firestore.indexes.json` trimmed to the ONE real composite (plans ownerUid+createdAt desc — verified against FirestoreStore queries); `firebase.json` + `.firebaserc` (placeholder `growlocal-demo`); FE hosting choice = **Firebase App Hosting** (`frontend/apphosting.yaml`) because static export can't serve dynamic /plan/[id] + cookie-locale SSR; README rewritten (architecture diagram, env tables, deploy commands incl. Cloud Run source-deploy one-liner, 3-min demo script, known limitations). Commit `a8f74dc`. Actual deploys pending user keys (B-002, gcloud/firebase CLI absent B-001)._
+- _2026-10-26 19:00 — Step 15 final checklist executed: (1) backend pytest 44/44 + eslint/`next build` clean; (2) mobile-viewport: viewport meta present, mobile-first layout, Hindi cookie render verified on :3000 (real-device pass pending — T-064, needs user); (3) budget ≤ user budget enforced by allocator + QA-matrix invariant; (4) Gemini failure → rule fallback verified (test_planner validates fallback en+hi; plan_service rebuilds on model-mix errors); (5) secrets scan `git grep api_key|secret` returns only docs/config identifiers; `git check-ignore` proves `backend/.env` + `frontend/.env.local` untracked; (6) `.env.example` complete on both sides; README setup matches actual files; (7) Tracker current._
+- _Remaining work after Step 15: real Cloud Run + App Hosting + Firestore deploys (needs CLI + keys — B-001/B-002/T-002); live-Gemini rerun + prompt tuning (Step 12.3); real-phone QA (T-064) + backup demo video (T-071); P2: voice input hi-IN (T-052), per-type content regeneration needs regenerate flag when live-AI is on._
 - _2026-10-26 18:05 — Step 13 (P1) complete: (1) Firebase Auth code-complete w/ guest fallback; real sign-in blocked on project keys (T-002) → B-003 scope via user. (2) Festivals: backend filters by `relevantTypes` per business type — live-verified (bakery: Diwali/Bhai Dooj/Wedding Season/Christmas vs coaching: Diwali only). (3) NEW `CompetitorsCard` on the plan dashboard: device geolocation → `GET /api/places`, glass UI, en/hi copy, graceful denied/key-missing/empty states (endpoint smoke: `{competitors:[], note}` without key). (4) Feedback loop: found real contract bug — UI sent `neutral|did_not_work`, Schema.md/backend allow `worked|partial|didnt`; fixed frontend (`lib/api.ts`, FeedbackForm), added `test_feedback_summary_surfaces_correctly` (asserts 422 on bad enum + summary lists worked/didnt channels); rule-based fallback does not personalize (documented limitation, AI path receives FEEDBACK token). (5) Rate-limit messaging verified (`rate_limited`→`rateLimited` copy in en+hi). Added `frontend/.env.example`. Backend 44/44 pytest; frontend tsc/eslint/build clean. Commit `3b369e3`._
