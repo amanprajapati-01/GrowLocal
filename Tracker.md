@@ -115,3 +115,4 @@
 - npm audit: 4 high-sev findings, all in optional Firebase client chain (`@grpc/grpc-js`); not used by our guest-mode app (backend owns Firestore via Admin SDK). Deferred; documented.
 - npm EBADENGINE warnings: some firebase v26 packages request node>=24; harmless warnings, firebase is lazily imported and optional.
 - create-next-app generated an `AGENTS.md` in frontend/ — left in place.
+- _2026-10-26 14:20 — Step 10 complete: 20-component design-system library (Button 5 variants, Card, Badge, Chip, ChoiceCard, BudgetSlider+presets+custom, StepperProgress, ChannelCard FREE/₹, BudgetChart (Recharts donut + text legend), TaskItem (optimistic PATCH with rollback), WeekAccordion, ContentCard (copy/regenerate/wa.me), FestivalChip, LanguageToggle, TopBar, BottomNav, Toast, Skeleton, ErrorState/EmptyState). tsc, eslint, next build all clean; commit 453afe2._
