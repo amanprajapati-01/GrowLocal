@@ -1,0 +1,22 @@
+# Firebase App Hosting config for the GrowLocal web frontend (Next.js 16).
+# Why App Hosting and not static export:
+#   - the app is server-rendered (dynamic /plan/[id] routes + cookie-based
+#     locale via next-intl middleware), which `next export` cannot serve;
+#   - App Hosting runs Next.js SSR natively with buildpacks and scales via
+#     Cloud Run under the hood. `firebase init apphosting` wires the backend;
+#     `firebase deploy --only apphosting` ships this directory.
+
+runConfig:
+  minInstances: 1 # cheap warm pool so the demo never cold-starts
+  maxInstances: 4
+  cpu: 1
+  memoryMiB: 512
+  concurrency: 80
+
+env:
+  # Public backend origin the browser talks to (replace the demo slug at deploy)
+  - variable: NEXT_PUBLIC_API_BASE_URL
+    value: https://growlocal-api-DEMO_SLUG-a.run.app
+    availability:
+      - BUILD
+      - RUNTIME

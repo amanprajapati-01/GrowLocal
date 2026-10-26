@@ -1,0 +1,63 @@
+rules_version = '2';
+
+/**
+ * GrowLocal Firestore security rules — from docs/Schema.md §5.
+ * Clients only read their own data; ALL writes to plans/*.tasks are owner-checked.
+ * Backend (Cloud Run + Firebase Admin SDK) bypasses these rules by design
+ * (Admin SDK runs with elevated privileges) — it is the only writer of plans.
+ */
+service cloud.firestore {
+  match /databases/{db}/documents {
+    function isOwner(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+
+    // Per-user profiles (language etc.)
+    match /users/{uid} {
+      allow read, write: if isOwner(uid);
+    }
+
+    // Business profiles write via backend only — clients never write directly
+    match /businesses/{id} {
+      allow read, write: if false;
+    }
+
+    // Plans: backend writes (Admin SDK), clients read their own
+    match /plans/{planId} {
+      allow read: if request.auth != null
+        && resource.data.ownerUid == request.auth.uid;
+      allow write: if false;
+
+      // Task check-offs come from the web client:
+      match /tasks/{taskId} {
+        allow read, update: if request.auth != null
+          && get(/databases/$(db)/documents/plans/$(planId)).data.ownerUid == request.auth.uid;
+      }
+      match /contentPacks/{packId} {
+        allow read: if request.auth != null
+          && get(/databases/$(db)/documents/plans/$(planId)).data.ownerUid == request.auth.uid;
+      }
+    }
+
+    // Daily usage counters (rate limiting): read-only for the owner
+    match /counters/{docId} {
+      allow read: if request.auth != null && docId.matches('.*' + request.auth.uid + '.*');
+      allow write: if false;
+    }
+
+    // Feedback: append-only for the owner, no reads back
+    match /feedback/{id} {
+      allow create: if request.auth != null
+        && request.resource.data.ownerUid == request.auth.uid;
+      allow read, update, delete: if false;
+    }
+
+    // Seeded catalogs: public read, backend-only write
+    match /playbooks/{id} { allow read: if true; allow write: if false; }
+    match /festivals/{id} { allow read: if true; allow write: if false; }
+    match /channels/{id}  { allow read: if true; allow write: if false; }
+
+    // Deny everything else
+    match /{document=**} { allow read, write: if false; }
+  }
+}
