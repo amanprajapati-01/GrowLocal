@@ -4,7 +4,7 @@
 
 **Legend:** P0 must · P1 nice · P2 stretch · Owner = A (Frontend) / B (Backend) / C (AI/Content) / D (Pitch/QA)
 
-**Status snapshot:** Phase 1 done (backend core working with dev switches) · Overall: ~45% · Blockers: none · Last updated: 2026-10-26
+**Status snapshot:** Phase 1 done (backend core working with dev switches) · Overall: ~50% · Blockers: none · Last updated: 2026-10-26
 
 ---
 
@@ -95,6 +95,7 @@
 | 2026-10-26 | Added public `GET /api/channels` metadata endpoint. | Frontend needs bilingual channel names; single source of truth remains channels.json. |
 | 2026-10-26 | Scorer uses a portfolio rule: mandatory free channels + best paid channels fill slots when budget ≥ ₹300. | Ensures allocated money always has a receiver; PRD requires budget-first plans that actually spend. |
 | 2026-10-26 | UI follows `meta/DESIGN.md` tokens (user instruction supersedes `docs/Design.md` §3 colors). | Direct user message: "for UI work meta/DESIGN.md". Inter + Noto Sans Devanagari kept for Hindi support. |
+| 2026-10-26 | **Aurora Glass variant layer** (user-approved): dark `#05070c` stage with drifting cobalt/violet/teal orbs + noise; frosted-glass surfaces (`.glass`/`.glass-solid`/`.glass-pill`/`.glass-active`/`.glass-hero`); token VALUES remapped for dark (names kept). Cobalt `#0064e0` stays reserved for plan-generation CTAs; `@supports` fallback for no-`backdrop-filter` browsers; `prefers-reduced-motion` disables drift; animation is transform/opacity only. | User asked for an impressive "liquid glass" redesign and chose "Dark aurora showcase" + "keep cobalt discipline". DESIGN.md remains the base system; aurora is an extension logged here, not a replacement. |
 
 ## Progress log
 - _2026-10-26 11:00 — Step 1: env checked: Node 22.18.0, npm 11.8.0, Python 3.13.5, Git 2.50.1; gcloud/firebase CLI absent (non-blocking). git init._
@@ -117,3 +118,4 @@
 - create-next-app generated an `AGENTS.md` in frontend/ — left in place.
 - _2026-10-26 14:20 — Step 10 complete: 20-component design-system library (Button 5 variants, Card, Badge, Chip, ChoiceCard, BudgetSlider+presets+custom, StepperProgress, ChannelCard FREE/₹, BudgetChart (Recharts donut + text legend), TaskItem (optimistic PATCH with rollback), WeekAccordion, ContentCard (copy/regenerate/wa.me), FestivalChip, LanguageToggle, TopBar, BottomNav, Toast, Skeleton, ErrorState/EmptyState). tsc, eslint, next build all clean; commit 453afe2._
 - _2026-10-26 15:05 — Step 11: all 8 P0 screens built and live: landing (hero dual-CTA), /start 5-step wizard (prefill=bakery demo shortcut), /generating (staged progress + real POST + retry), /plan/[id] dashboard (persona, budget donut+channel cards, start-free, weeks w/ optimistic PATCH, festivals, CTA bar), /plan/[id]/content (4 tabs+copy+regen), /plans, /login (guest-first), /plan/[id]/feedback + friendly not-found. Next 16 params=Promise; new react-hooks rules satisfied via .then-chains; router.push instead of location.href. E2E via CORS verified (create/patch/list/content/feedback). Build+lint clean; commit 9d4a472._
+- _2026-10-26 16:40 — Aurora Glass redesign (user-approved, 3 commits): (1) `f62a017` tokens + aurora stage + chrome (TopBar glass strip, BottomNav floating dock, dark-glass Toast, LanguageToggle/Chip glass pills, Button specular/cobalt-glow, Card variants); (2) `38df815` landing hero + wizard + generating + error/empty/not-found; (3) `7c41b59` dashboard glass hero + content studio/tabs/cards + feedback form + login + plans hover-lift + skeleton; added `textarea.field` rule. tsc/eslint/build clean after each commit. Tracker decision note added._
