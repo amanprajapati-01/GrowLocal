@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Builds
+.next/
+out/
+build/
+dist/
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pyc
+.pytest_cache/
+.ruff_cache/
+
+# Secrets & env
+.env
+.env.*
+!.env.example
+!.env.local.example
+*.pem
+serviceAccount*.json
+
+# Firebase
+.firebase/
+firebase-debug.log
+firebase-debug.*.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Next.js
+next-env.d.ts
+*.tsbuildinfo
