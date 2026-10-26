@@ -157,8 +157,27 @@ class FirestoreStore:
 
     def _client(self) -> Any:
         if self.db is None:
-            from firebase_admin import firestore
+            import json
+            import os
 
+            import firebase_admin
+            from firebase_admin import credentials, firestore
+
+            from app.config import get_settings
+
+            if not firebase_admin._apps:
+                raw = os.getenv("FIREBASE_SERVICE_ACCOUNT_JSON", "").strip()
+                if raw:
+                    # Serverless (Vercel/Render) can't use ADC files — pass the
+                    # service-account JSON as a single-line env var instead.
+                    cred = credentials.Certificate(json.loads(raw))
+                else:
+                    # Local dev / Cloud Run: Application Default Credentials.
+                    cred = credentials.ApplicationDefault()
+                options = {}
+                if get_settings().firebase_project_id:
+                    options["projectId"] = get_settings().firebase_project_id
+                firebase_admin.initialize_app(cred, options or None)
             self.db = firestore.client()
         return self.db
 

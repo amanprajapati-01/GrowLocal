@@ -81,6 +81,7 @@ cd backend && .venv\Scripts\python.exe ..\backend\scripts\qa_matrix.py   # Step-
 | `GEMINI_MODEL` | `gemini-2.5-flash` | model id for plan/content JSON mode |
 | `GOOGLE_PLACES_API_KEY` | *(empty)* | optional; `GET /api/places` returns `[] + note` without it |
 | `FIREBASE_PROJECT_ID` | *(empty)* | enables Firestore/Auth Admin SDK |
+| `FIREBASE_SERVICE_ACCOUNT_JSON` | *(empty)* | single-line service-account JSON — required on Vercel/Render (ADC unavailable); optional on Cloud Run |
 | `AUTH_DISABLED` | `true` | skip token check and use `dev-user` (DEV ONLY) |
 | `GEMINI_MOCK` | `true` | canned-valid plan/content (DEV ONLY) |
 | `STORE_BACKEND` | `memory` | `memory` \| `firestore` |
@@ -95,7 +96,28 @@ cd backend && .venv\Scripts\python.exe ..\backend\scripts\qa_matrix.py   # Step-
 
 ## Deploy
 
-### Backend → Cloud Run (asia-south1, Enemy-official pattern: source deploy builds the Dockerfile)
+### Deploy on Vercel (fastest for a hackfest demo — 2 projects from one repo)
+
+**Project A — backend (FastAPI as a Vercel Python function).** Vercel runs the ASGI app from `backend/api/index.py`; `requirements.txt` is installed automatically.
+| Setting | Value |
+|---|---|
+| Root Directory | `backend` |
+| Framework Preset | Other / Python |
+| Env vars | `AUTH_DISABLED=true` (until Firebase keys), `GEMINI_MOCK=true` (or your real `GEMINI_API_KEY`), `STORE_BACKEND=firestore` (**required for persistence** — the in-memory store resets per serverless instance; with it set also add `FIREBASE_PROJECT_ID` + `FIREBASE_SERVICE_ACCOUNT_JSON`), `ALLOWED_ORIGIN=https://<frontend-url>.vercel.app` + comma list (any `*.vercel.app` origin is already accepted) |
+| After deploy | verify `https://<backend>.vercel.app/api/health` → `{"status":"ok"}` |
+
+**Project B — frontend (Next.js).**
+| Setting | Value |
+|---|---|
+| Root Directory | `frontend` |
+| Env vars | `NEXT_PUBLIC_API_BASE_URL=https://<backend>.vercel.app` (**mandatory** — otherwise the build bakes in `localhost:8000` and every request fails; the app logs an explicit console error about this) |
+
+Because the URL is embedded at build time, set it **before the first deploy** (or redeploy after adding it).
+
+### Backend → Cloud Run / Frontend → Firebase App Hosting (original target if you prefer)
+
+### Backend → Cloud Run (asia-south1 — source deploy builds the Dockerfile)
+
 ```bash
 gcloud auth login
 gcloud run deploy growlocal-api \

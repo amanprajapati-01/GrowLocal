@@ -8,6 +8,16 @@
 export const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/+$/, "") || "http://localhost:8000";
 
+if (process.env.NODE_ENV === "production" && API_BASE_URL.includes("localhost")) {
+  // Deployed build without NEXT_PUBLIC_API_BASE_URL → requests would hit the
+  // visitor's own machine and fail. Shout it into the console for a fast fix.
+  console.error(
+    "[GrowLocal] NEXT_PUBLIC_API_BASE_URL is not set — API calls target " +
+      API_BASE_URL +
+      ". Set the env var in your hosting provider's project settings and redeploy."
+  );
+}
+
 export class ApiError extends Error {
   status: number;
   code: string;

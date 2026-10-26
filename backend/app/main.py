@@ -27,11 +27,19 @@ app = FastAPI(
 allow_origins = [o.strip() for o in settings.allowed_origin.split(",") if o.strip()]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=allow_origins,
+    allow_origins=allow_origins,  # exact origins via ALLOWED_ORIGIN (comma list)
+    # demo-friendly: any *.vercel.app preview/production URL works without env tweaks
+    allow_origin_regex=r"https://[a-z0-9-]+\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.get("/api/health", include_in_schema=False)
+async def api_health() -> dict[str, str]:
+    """Same check as /health, under /api so it works identically on Vercel."""
+    return {"status": "ok"}
 
 
 @app.exception_handler(HTTPException)
